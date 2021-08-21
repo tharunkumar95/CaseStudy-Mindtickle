@@ -8,11 +8,15 @@ movie_response = requests.get('http://www.omdbapi.com/?apikey=926c06e4&t=' + mov
 json_data = json.loads(movie_response.text)
 
 # open a csv file (movies.csv, in this case) for writing in the present working directory
-csv_data = csv.writer(open('movies.csv', 'w+', newline=''))
+csv_file = open('movies.csv', 'w')
+csv_writer = csv.writer(csv_file)
+
 
 # write the headers and values to the csv file
 for header, value in json_data.items():
-    csv_data.writerow([header])
-    csv_data.writerow([value])
+    csv_writer.writerow([header])
+    csv_writer.writerow([value])
 
+# closing the session
+csv_file.close()
 
