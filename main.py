@@ -3,7 +3,8 @@ import json
 import csv
 
 # search for movies in the web and get the response in json format
-movie_name = input("Please enter a movie name, to see it's full details: ")
+# movie_name = input("Please enter a movie name, to see it's full details: ")
+movie_name = 'Avengers'
 movie_response = requests.get('http://www.omdbapi.com/?apikey=926c06e4&t=' + movie_name)
 json_data = json.loads(movie_response.text)
 
@@ -12,10 +13,9 @@ csv_file = open('movies.csv', 'w')
 csv_writer = csv.writer(csv_file)
 
 
-# write the headers and values to the csv file
+# write the headers and values to the csv file, in row and column fashion
 for header, value in json_data.items():
-    csv_writer.writerow([header])
-    csv_writer.writerow([value])
+    csv_writer.writerow([header, value])
 
 # closing the session
 csv_file.close()
